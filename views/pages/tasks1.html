@@ -1,0 +1,51 @@
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">Tasks</h1>
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<div class="row">
+	<div class="col-lg-12">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			List of tasks <br> Search by: id <input
+				ng-model="textFilter.id"> name <input
+				ng-model="textFilter.name">
+		</div>
+		<table class="table table-striped table-bordered table-hover">
+			<tr ng-repeat="task in tasks | filter:textFilter:strict">
+				<td>Exercise {{task.id}}: {{task.name}}
+					<button class="btn pull-right" ng-click="select(task)">Choose</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div>
+
+		<table class="table table-striped table-bordered table-hover">
+
+			<tr>
+				<td>
+				<span ng-show="selectedTask"><b>Exercise {{selectedTask.id}}: {{selectedTask.name}}</b></span>
+				<br>
+				{{selectedTask.description}}
+					<button class="btn pull-right" ng-click="select(task)">Assign</button>
+					<div class="dropdown pull-right">
+						<button class="btn btn-default dropdown-toggle"
+							type="button" id="dropdownMenu1" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="true">
+							Employees <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+							<li><a href="#/dashboard/tasks1">Employee1</a></li>
+							<li><a href="#/dashboard/tasks1">Employee2</a></li>
+							<li><a href="#/dashboard/tasks1">Employee3</a></li>
+							<li><a href="#/dashboard/tasks1">Employee4</a></li>
+						</ul>
+					</div>
+				</td>
+		</table>
+	</div>
+</div>
+</div>

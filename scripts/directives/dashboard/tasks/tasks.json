@@ -1,0 +1,104 @@
+[
+{
+	"href":"#/dashboard/home",
+	"icon":"comment",
+	"text":"New Comment",
+	"time":"2015-08-08 9:29"
+},
+{
+	"href":"#/dashboard/home",
+	"icon":"twitter",
+	"text":"3 New Followers",
+	"time":"2014-02-12 15:53"
+},
+{
+	"href":"#/dashboard/home",
+	"icon":"envelope",
+	"text":"Message Sent",
+	"time":"2013-06-17 10:48"
+},
+{
+	"href":"#/dashboard/home",
+	"icon":"tasks",
+	"text":"New Task",
+	"time":"2015-05-01 11:52"
+},
+{
+	"href":"#/dashboard/home",
+	"icon":"upload",
+	"text":"Server Rebooted",
+	"time":"2015-11-02 5:59"
+},
+{
+	"href":"#/dashboard/home",
+	"icon":"bolt",
+	"text":"Server Crashed!",
+	"time":"2015-01-06 12:36"
+},
+{
+	"href":"#/dashboard/home",
+	"icon":"warning",
+	"text":"Server Not Responding",
+	"time":"2013-03-22 16:28"
+},
+{
+	"href":"#/dashboard/home",
+	"icon":"shopping-cart",
+	"text":"New Order Placed",
+	"time":"2015-04-14 17:48"
+},
+{
+	"href":"#/dashboard/home",
+	"icon":"money",
+	"text":"Payment Received",
+	"time":"2012-10-16 14:37"
+},
+{
+	"href":"#/dashboard/home",
+	"icon":"calendar",
+	"text":"Calendar updated",
+	"time":"2010-09-27 12:18"
+},
+{
+	"href":"#/dashboard/home",
+	"icon":"comment",
+	"text":"Commented on a post",
+	"time":"2011-07-29 10:39"
+},
+{
+	"href":"#/dashboard/home",
+	"icon":"truck",
+	"text":"Order 392 shipped",
+	"time":"2015-05-15 11:17"
+},
+{
+	"href":"#/dashboard/home",
+	"icon":"money",
+	"text":"Invoice 653 has been paid",
+	"time":"2015-12-16 19:30"
+},
+{
+	"href":"#/dashboard/home",
+	"icon":"user",
+	"text":"A new user has been added",
+	"time":"2009-08-14 17:28"
+},
+{
+	"href":"#/dashboard/home",
+	"icon":"check",
+	"text":"Completed task: 'pick up dry cleaning'",
+	"time":"2015-07-13 9:22"
+},
+{
+	"href":"#/dashboard/home",
+	"icon":"globe",
+	"text":"Saved the world",
+	"time":"2015-01-19 15:37"
+},
+{
+	"href":"#/dashboard/home",
+	"icon":"check",
+	"text":"Completed task: 'fix error on sales page'",
+	"time":"2014-08-03 20:49"
+}
+]

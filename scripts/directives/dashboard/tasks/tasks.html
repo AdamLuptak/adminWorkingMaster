@@ -1,0 +1,36 @@
+<div
+	ng-repeat="task in tasks | orderBy:sortType:sortReverse | filter:searchTask | limitTo:numberOfTasks">
+	<a href={{task.href}} class="list-group-item"
+		ng-click="setSelected($index)"> <i
+		class="fa fa-{{task.icon}} fa-fw"></i> {{task.text}} <span
+		class="pull-right text-muted small badge">{{task.time}}</span>
+	</a>
+	<div class="panel panel-info" ng-show="$index==selected">
+		<!-- 		<div class="panel-heading">Details:</div> -->
+		<div class="panel-body">
+			<table class="table table-condensed">
+				<tr>
+					<th>Description</th>
+					<th>User
+				</tr>
+
+				<tr>
+					<td><p>{{task.text}}</p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing
+							elit. Curabitur vulputate faucibus ex, a tincidunt augue pulvinar
+							in. Sed pretium vehicula massa nec fermentum. Nullam vehicula
+							fermentum erat, vitae mattis elit hendrerit quis. Aenean
+							placerat, ex id tincidunt mollis, dolor libero iaculis risus, et
+							tincidunt libero odio at felis. Donec tincidunt a nulla vitae
+							vulputate. Pellentesque eget tempor quam. Vivamus eu dignissim
+							metus. Vestibulum in metus elit. Ut dignissim orci in metus
+							tempor imperdiet. Morbi vitae facilisis risus. Quisque
+							condimentum, dui eu auctor feugiat, sapien elit bibendum nisl, a
+							suscipit quam velit eget arcu. Suspendisse luctus auctor purus
+							vel consectetur.</p></td>
+					<td><p>John Smith</p></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
