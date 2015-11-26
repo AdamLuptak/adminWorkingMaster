@@ -3,7 +3,7 @@
     'oc.lazyLoad',
     'ui.router',
     'ui.bootstrap',
-    'angular-loading-bar',
+    'angular-loading-bar'
     ])
   adminGui.config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
 
@@ -31,6 +31,10 @@
               'scripts/directives/header/header-notification/header-notification.js',
               'scripts/directives/sidebar/sidebar.js',
               'scripts/directives/sidebar/sidebar-search/sidebar-search.js',
+               'scripts/service/dashtaskService.js',
+               'scripts/service/taskService.js',
+               'scripts/service/usersService.js',
+                'scripts/controllers/main.js'
               ]
             }),
             $ocLazyLoad.load(

@@ -17,6 +17,9 @@
 			</div>
 		</div>
 
+
+		   <input class="form-control" type="text" placeholder="Enter state" ng-model="selectedState" bs-typeahead bs-options="state for state in states">
+
 		<div class="row">
 			<div ng-repeat="div in divs">
 				<stats number="{{div.number}}" comments="{{div.comments}}"

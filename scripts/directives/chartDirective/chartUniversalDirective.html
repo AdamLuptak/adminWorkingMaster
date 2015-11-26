@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-md-12 col-md-offset-0.5">
+    <div class="panel panel-default">
+      <div class="panel-heading">Chart - {{chartSelect}}</div>
+      <div class="panel-body">
+
+
+       <!-- Line Chart directive -->
+       <!-- <chart post="{{chartSelect}}" char-data = "chartType()"  ></chart>  -->
+       <div ng-include="page1"></div>
+       <!-- Control panel -->
+       <div class="col-md-3 col-md-offset-1.5"  >
+
+        <div class="form-group">
+          <label>Data - {{chartSelect}} </label>
+          <select class="form-control"  ng-model="chartSelect"  >
+            <option value="{{chartType.type}}" ng-repeat="chartType in dataChart | limitTo:2 ">{{chartType.type}}</option>
+          </select>
+
+        </div>
+        <div class="form-group">
+          <label>Show only data Series</label>
+          <div class="checkbox" ng-repeat="chartDataName in actualDataSet.series">
+            <label>
+              <input type="checkbox"  ng-click='checkedBox(chartDataName)'> Data {{chartDataName}}
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- End of control panel -->
+    </div>
+
+  </div>
+  <!-- end fo panel for chart -->
+  <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+    <thead>
+      <tr>
+        <th ng-repeat="label in actualDataSet.labels">{{label}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="odd gradeX" ng-repeat= "data in actualDataSet.data track by $index">
+        <td ng-repeat="seriesData in data track by $index" ng-if="seriesData != null" > {{seriesData}} </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>

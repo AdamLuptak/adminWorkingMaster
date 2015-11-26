@@ -29,4 +29,11 @@ angular.module('AdminGui')
 	$scope.deleteSelected=function(){
 		$scope.selected=null;
 	}
+
+      
+ $scope.searchClick = function(){
+ 	console.log("sdssdf");
+ }
+
+
 }]);

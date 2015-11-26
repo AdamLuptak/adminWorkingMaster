@@ -4,99 +4,12 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12 col-md-offset-0.5">
-        <div class="panel panel-default">
-            <div class="panel-heading">Chart - {{chartSelect}}</div>
-            <div class="panel-body">
-
-                <!-- Line Chart directive -->
-                <!-- <chart post="{{chartSelect}}" char-data = "chartType()"  ></chart>  -->
-                <div ng-include="page1"></div>
-                <!-- Control panel -->
-                <div class="col-md-3 col-md-offset-1.5"  >
-
-                    <div class="form-group">
-                        <label>Data - {{chartSelect}} </label>
-                        <select class="form-control"  ng-model="chartSelect"  >
-                            <option value="{{chartType.type}}" ng-repeat="chartType in dataChart | limitTo:2 ">{{chartType.type}}</option>
-                        </select>
-
-                    </div>
-                    <div class="form-group">
-                        <label>Show only data Series</label>
-                        <div class="checkbox" ng-repeat="chartDataName in actualDataSet.series">
-                            <label>
-                                <input type="checkbox"  ng-click='checkedBox(chartDataName)'> Data {{chartDataName}}
-                            </label>
-                        </div>
-                    </div>
-                    <button class="btn btn-danger" type="button" data-ng-click="stopTimer()">Stop T</button>
-                    <button class="btn btn-success " type="button" data-ng-click="startTimer()">Start T</button>
-                </div>
-                <!-- End of control panel -->
-            </div>
-
-        </div>
-        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-            <thead>
-                <tr>
-                    <th ng-repeat="label in actualDataSet.labels">{{label}}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="odd gradeX" ng-repeat= "data in actualDataSet.data track by $index">
-                  <td ng-repeat="seriesData in data track by $index"> {{seriesData}} </td>
-              </tr>
-          </tbody>
-      </table>
-  </div>
+<!-- chart view component -->
+<div>
+    <chart-directive></chart-directive>
 </div>
 
-<div class="row">
-    <div class="col-md-6 col-md-offset-0.5">
-        <div class="panel panel-default">
-            <div class="panel-heading">Chart - {{dataChart[2].type}}</div>
-            <div class="panel-body">
-                <chart post="pie" char-data = "dataChart[2]"  ></chart>
-            </div>
-            <!-- End of control panel -->
-            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                <thead>
-                    <tr>
-                        <th ng-repeat="label in dataChart[2].labels">{{label}}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="odd gradeX" >
-                        <td ng-repeat= "data in dataChart[2].data track by $index"> {{data }} </td> -
-                    </tr> 
-                </tbody>
-            </table>
-        </div>
 
-    </div>
-    <div class="col-md-6 col-md-offset-0.5">
-        <div class="panel panel-default">
-            <div class="panel-heading">Chart - {{dataChart[3].type}}</div>
-            <div class="panel-body">
-               <chart post="radar" char-data = "dataChart[3]"  ></chart>
-           </div>
-           <!-- End of control panel -->
-           <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-            <thead>
-                <tr>
-                    <th ng-repeat="label in dataChart[3].labels | limitTo:5">{{label}}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="odd gradeX" ng-repeat= "datat in actualDataSet.data track by $index">
-                  <td ng-repeat="a in datat  | limitTo:5  track by $index"> {{a}} </td>
-              </tr>
-          </tbody>
-      </table>
-  </div>
 
-</div>
-</div>
+
 
