@@ -31,10 +31,9 @@
               'scripts/directives/header/header-notification/header-notification.js',
               'scripts/directives/sidebar/sidebar.js',
               'scripts/directives/sidebar/sidebar-search/sidebar-search.js',
-               'scripts/service/dashtaskService.js',
-               'scripts/service/taskService.js',
-               'scripts/service/usersService.js',
-                'scripts/controllers/main.js'
+              'scripts/service/dashtaskService.js',
+              'scripts/service/taskService.js',
+              'scripts/service/usersService.js'
               ]
             }),
             $ocLazyLoad.load(
@@ -144,6 +143,8 @@
           files:[
           'scripts/controllers/usersController.js',
           'scripts/directives/usersTable/usersTable.js',
+          'scripts/service/usersService.js',
+          'scripts/service/taskService.js',
           ]
         })
       }
@@ -174,7 +175,7 @@
       }
     }
   })
-.state('dashboard.tasks1',{
+  .state('dashboard.tasks1',{
     templateUrl:'views/pages/tasks1.html',
     url:'/tasks1',
     controller:'TasksController',

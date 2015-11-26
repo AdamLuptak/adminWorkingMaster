@@ -6,10 +6,11 @@
 			<input type="text" class="form-control" placeholder="Search..."
 
 			ng-model="searched"
+			typeahead-on-select="searchClick($item)";
 
 			typeahead="item for item in itemSearch | filter:$viewValue | limitTo:3"
 
-			typeahead-template-url="scripts/directives/sidebar/sidebar-search/searchTemplate.html">
+			typeahead-template-url="scripts/directives/sidebar/sidebar-search/searchTemplate.html"> 
 
 		</form>
 		<span class="input-group-btn">

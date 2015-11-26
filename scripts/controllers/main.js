@@ -30,10 +30,5 @@ angular.module('AdminGui')
 		$scope.selected=null;
 	}
 
-      
- $scope.searchClick = function(){
- 	console.log("sdssdf");
- }
-
 
 }]);

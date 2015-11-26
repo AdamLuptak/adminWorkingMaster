@@ -1,4 +1,14 @@
-adminGui.controller('usersController', [ '$scope', function($scope) {
+adminGui.controller('usersController', [ '$scope','usersService','taskService', function($scope,usersService,taskService) {
+	
+	usersService.success(function(data) {
+		$scope.users = data;
+	});
+	taskService.success(function(data) {
+		$scope.tasks = data;
+		$scope.datas = $scope.users.concat($scope.tasks);
+	});
+	
+		
 	$scope.orderByField = 'id';
 	$scope.reverseSort = false;
 	$scope.orderBy = function(field) {
@@ -9,10 +19,65 @@ adminGui.controller('usersController', [ '$scope', function($scope) {
 		}
 		$scope.orderByField = field;
 	}
+	$scope.pokus = function(index){
+		console.log($scope.users[index]);
+	}
 	
+	$scope.showUserModal = function(user){
+	$scope.currUser = user;
+	$('#userModal').modal('show');
+	}
+	
+	$scope.showCreateModal = function(){
+		$('#createUserModal').modal('show');
+	}
+	
+	$scope.selectedUsers = null;
+	$scope.checkedAll=false;
+	$scope.checkAll = function(){
+		if($scope.checkedAll===false){
+			$('.check').prop('checked', true);
+			$scope.checkedAll=true;
+		} else {
+			$('.check').prop('checked', false);
+			$scope.checkedAll=false;
+		}
+		
+		
+	}
+	
+	
+	
+/*	$scope.checked = [
+	                  {id: 5},
+	                  ]
+	
+	$scope.check = function(id){
+		$scope.checked.push({id: id});
+	}
+	
+	$scope.deleteChecked = function(){
+		
+	}*/
+	
+	$scope.currId=10;
+	$scope.createUser = function(){
+		user = {
+				firstName : $scope.firstName,
+				surname : $scope.surname,
+				id : $scope.currId++,
+				organisation : $scope.organisation,
+				assigned : 0,
+				done : 0
+		}
+		$scope.users.push(user);
+		$scope.firstName = '';
+		$scope.surname= '';
+		$scope.organisation ='';
+	}
 	
 	$scope.tableHeads = [ {
-		width : '10%',
+		width : '15%',
 		name : 'id',
 		label : 'Id'
 	}, {
@@ -24,81 +89,17 @@ adminGui.controller('usersController', [ '$scope', function($scope) {
 		name : 'surname',
 		label : 'Surname'
 	}, {
-		width : '10%',
+		width : '15%',
 		name : 'organisation',
 		label : 'Organisation'
 	}, {
-		width : '10%',
+		width : '15%',
 		name : 'assigned',
 		label : 'Assigned tasks'
 	}, {
-		width : '10%',
+		width : '15%',
 		name : 'done',
 		label : 'Tasks done'
 	} ]
-	$scope.users = [ {
-		firstName : 'Vladislav',
-		surname : 'Mino',
-		id : 1,
-		organisation : 'TSO AD',
-		assigned : 1,
-		done : 1
-	}, {
-		firstName : 'Jakub',
-		surname : 'Mino',
-		id : 2,
-		organisation : 'TSO AD',
-		assigned : 1,
-		done : 1
-	}, {
-		firstName : 'Patrik',
-		surname : 'Krivka',
-		id : 3,
-		organisation : 'TSO AD',
-		assigned : 1,
-		done : 1
-	}, {
-		firstName : 'Vladimir',
-		surname : 'Filarsky',
-		id : 4,
-		organisation : 'TSO AD',
-		assigned : 1,
-		done : 1
-	}, {
-		firstName : 'Adam',
-		surname : 'Luptak',
-		id : 5,
-		organisation : 'TSO AD',
-		assigned : 1,
-		done : 1
-	}, {
-		firstName : 'Tomas',
-		surname : 'Mako',
-		id : 6,
-		organisation : 'TSO AD',
-		assigned : 1,
-		done : 1
-	}, {
-		firstName : 'Peter',
-		surname : 'Petrovaj',
-		id : 7,
-		organisation : 'SDD',
-		assigned : 30,
-		done : 5
-	}, {
-		firstName : 'Matus',
-		surname : 'Tomcak',
-		id : 8,
-		organisation : 'SDD',
-		assigned : 20,
-		done : 2
-	}, {
-		firstName : 'Pako',
-		surname : 'Romano',
-		id : 20,
-		organisation : 'PR',
-		assigned : 50,
-		done : 5
-	} ]
-
+	
 } ]);
