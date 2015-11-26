@@ -1,4 +1,4 @@
-adminGui.controller('usersController', [ '$scope','usersService','taskService', function($scope,usersService,taskService) {
+adminGui.controller('usersController', [ '$scope','usersService','taskService','$location', function($scope,usersService,taskService,$location) {
 	
 	usersService.success(function(data) {
 		$scope.users = data;
@@ -7,8 +7,21 @@ adminGui.controller('usersController', [ '$scope','usersService','taskService', 
 		$scope.tasks = data;
 		$scope.datas = $scope.users.concat($scope.tasks);
 	});
-	
+
+	$scope.showUserModal = function(user){
+		$scope.qsCurrUser = user;
 		
+		$('#userModal').modal('show');
+	}
+
+	var qs = $location.search();
+	
+	if(qs.user != null && qs.user.firstName != null){
+        console.log(qs.user);
+		 setTimeout(function(){ $scope.showUserModal(qs.user); }, 500);
+	}	
+
+
 	$scope.orderByField = 'id';
 	$scope.reverseSort = false;
 	$scope.orderBy = function(field) {
@@ -23,10 +36,7 @@ adminGui.controller('usersController', [ '$scope','usersService','taskService', 
 		console.log($scope.users[index]);
 	}
 	
-	$scope.showUserModal = function(user){
-	$scope.currUser = user;
-	$('#userModal').modal('show');
-	}
+
 	
 	$scope.showCreateModal = function(){
 		$('#createUserModal').modal('show');
@@ -63,12 +73,12 @@ adminGui.controller('usersController', [ '$scope','usersService','taskService', 
 	$scope.currId=10;
 	$scope.createUser = function(){
 		user = {
-				firstName : $scope.firstName,
-				surname : $scope.surname,
-				id : $scope.currId++,
-				organisation : $scope.organisation,
-				assigned : 0,
-				done : 0
+			firstName : $scope.firstName,
+			surname : $scope.surname,
+			id : $scope.currId++,
+			organisation : $scope.organisation,
+			assigned : 0,
+			done : 0
 		}
 		$scope.users.push(user);
 		$scope.firstName = '';
