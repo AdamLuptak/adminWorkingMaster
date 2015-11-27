@@ -8,7 +8,7 @@
  */
 
  angular.module('AdminGui')
- .directive('sidebarSearch', ['dashtaskService','usersService','taskService','$location', function(dashtaskService,usersService,taskService,$location) {
+ .directive('sidebarSearch', ['dashtaskService','usersService','taskService','$location','$state', function(dashtaskService,usersService,taskService,$location,$state) {
   return {
     templateUrl:'scripts/directives/sidebar/sidebar-search/sidebar-search.html',
     restrict: 'E',
@@ -24,12 +24,13 @@
 
  $scope.searchClick = function(value){
   $scope.searched = "";
-  
+  $scope.user = value;
   if(value.firstName != null){
-    $location.path( "/dashboard/users" ).search({user: value});;
+    $state.go("dashboard.users", { userData: $scope.user});
+    
   }else{
-   $location.path( "/dashboard/tasks" ).search({task: value});;
- }
+
+  }
 
 }
 

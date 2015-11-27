@@ -1,26 +1,68 @@
-adminGui.controller('usersController', [ '$scope','usersService','taskService','$location', function($scope,usersService,taskService,$location) {
+adminGui.controller('usersController', [ '$scope','usersService','taskService','$location','$stateParams','$state','$modal', function($scope,usersService,taskService,$location,$stateParams,$state,$modal) {
 	
-	usersService.success(function(data) {
-		$scope.users = data;
-	});
-	taskService.success(function(data) {
-		$scope.tasks = data;
-		$scope.datas = $scope.users.concat($scope.tasks);
-	});
+	$scope.showModal = function(user) {
+		$scope.searchedUser = user;
+		$scope.opts = {
+			backdrop: true,
+			backdropClick: true,
+			dialogFade: false,
+			keyboard: true,
+			templateUrl : '/scripts/directives/usersTable/modalContent.html',
+			controller : ModalInstanceCtrl,
+        resolve: {} // empty storage
+    };
 
-	$scope.showUserModal = function(user){
-		$scope.qsCurrUser = user;
-		
-		$('#userModal').modal('show');
+
+    $scope.opts.resolve.item = function() {
+            return angular.copy($scope.searchedUser); // pass name to Dialog
+        }
+        
+        var modalInstance = $modal.open($scope.opts);
+
+        modalInstance.result.then(function(){
+            //on ok button press 
+        },function(){
+            //on cancel button press
+            console.log("Modal Closed");
+        });
+    }
+
+    $scope.close = function () {
+    	$modalInstance.dismiss('cancel');
+    };
+
+
+    usersService.success(function(data) {
+    	$scope.users = data;
+    });
+    taskService.success(function(data) {
+    	$scope.tasks = data;
+    	$scope.datas = $scope.users.concat($scope.tasks);
+    });
+
+    $scope.showUserModal = function(user){
+    	$scope.qsCurrUser = user;
+
+    	$('#userModal').modal('show');
+    }
+
+
+    //paramter loading from Search - bar
+    $scope.qs = $stateParams.userData;
+	//must clear statePatams
+	
+
+
+	if($scope.qs  != null){
+		if($scope.qs.firstName != null && $scope.qs.surname != null){
+			console.log($scope.qs);
+			///setTimeout(function(){ $scope.showUserFromSearch(qs); }, 500);
+			//$scope.showUserFromSearch(qs);
+			$stateParams.userData = null;
+			$scope.showModal($scope.qs);
+			$scope.qs = null;	
+		}	
 	}
-
-	var qs = $location.search();
-	
-	if(qs.user != null && qs.user.firstName != null){
-        console.log(qs.user);
-		 setTimeout(function(){ $scope.showUserModal(qs.user); }, 500);
-	}	
-
 
 	$scope.orderByField = 'id';
 	$scope.reverseSort = false;
@@ -113,3 +155,18 @@ adminGui.controller('usersController', [ '$scope','usersService','taskService','
 	} ]
 	
 } ]);
+
+var ModalInstanceCtrl = function($scope, $modalInstance, $modal, item) {
+
+	$scope.searchedUser = item;
+
+	$scope.ok = function () {
+		$scope.searchedUser = null;
+		$modalInstance.close();
+	};
+
+	$scope.cancel = function () {
+		$scope.searchedUser = null;
+		$modalInstance.dismiss('cancel');
+	};
+}

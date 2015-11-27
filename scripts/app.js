@@ -133,6 +133,7 @@
     controller: 'usersController',
     templateUrl: 'views/users.html',
     url:'/users',
+    params: {userData: null},
     data: {
       requireLogin: false
     },

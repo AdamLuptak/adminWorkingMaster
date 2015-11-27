@@ -3,29 +3,30 @@ angular.module('AdminGui')
 	return {
 		restrict: 'E',
 		replace: true,
+		scope:{},
 		templateUrl: 'scripts/directives/chartDirective/chartUniversalDirective.html',
-		controller: function ($scope, $element) {
-
+		link: function ($scope) {
+			console.log($scope)
 			//variable where is storred actual chart
 			$scope.chartSelector = 0;
-			//variable for all chart data
-			$scope.dataChart = 0;
-            //for checkbox 
-            $scope.actualDataSetNumber = 0;
+		 	//variable for all chart data
+		 	$scope.dataChart = 0;
+          //for checkbox 
+          $scope.actualDataSetNumber = 0;
 
-            $scope.actualDataSet = 0;
+          $scope.actualDataSet = 0;
 
-            $scope.chartSelect="line";
+          $scope.chartSelect="line";
 
-            $scope.page1 = "scripts/directives/chartDirective/lineChartPlot.html";
+          $scope.page1 = "scripts/directives/chartDirective/lineChartPlot.html";
 
-            $scope.checkedCheckBoxes = [];
+          $scope.checkedCheckBoxes = [];
 
-            //after change value in combox change the type of chart
-            $scope.$watch('chartSelect', function(value) {
-            	$scope.chartSelect = value;
-            	$scope.changeChart(value);
-            });
+         //after change value in combox change the type of chart
+         $scope.$watch('chartSelect', function(value) {
+         	$scope.chartSelect = value;
+         	$scope.changeChart(value);
+         });
 
             //switches diferent chart html 
             $scope.changeChart= function(value){
@@ -52,15 +53,13 @@ angular.module('AdminGui')
 					$scope.actualDataSet.onClick = function (points, evt){
 						console.log(points, evt);
 					}
-                    $scope.actualDataSet.onHover = function (points) {
-      if (points.length > 0) {
-        console.log('Point', points[0].value);
-      } else {
-        console.log('No point');
-      }
-    };
-
-
+					$scope.actualDataSet.onHover = function (points) {
+						if (points.length > 0) {
+							console.log('Point', points[0].value);
+						} else {
+							console.log('No point');
+						}
+					};
 					//clone object for redrawing chart depence on checkboxess
 					$scope.newTeamMember = angular.copy($scope.actualDataSet);
 				});
@@ -96,13 +95,9 @@ angular.module('AdminGui')
 		    console.log($scope.checkedCheckBoxes)
 		    $scope.changeChart($scope.chartSelect);
 		}
-
-
+		//end of checkbox function
 	}
+	//end of directive controller
 }
-
-$scope.isRightUndefined = function(item) {
-  return item.data === undefined;
-}
-
+//end of directive return    
 }]);
