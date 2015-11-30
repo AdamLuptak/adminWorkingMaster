@@ -1,6 +1,6 @@
 <div class="panel panel-default">
 	<div class="panel-body">
-		<div id="userModal" class="modal" role="dialog">
+		<div id="userModal" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -37,7 +37,7 @@
 				<button id="button" class="btn btn-default" ng-click="showModalUni('#createUserModal')">Create User</button>
 				<button id="button" class="btn btn-default">Delete Selected</button>
 			</div>
-
+			<modal></modal>
 			<table class="table table-striped table-bordered table-hover"
 			id="tableUsers">
 			<thead>
@@ -56,18 +56,19 @@
 			<tbody>
 				<tr ng-repeat="user in users | filter:search | orderBy:orderByField:reverseSort" >
 					<td><input type="checkbox" class="check" value="user.id"></td>
-					<td ng-click="showModalUni('#userModal')" style="cursor: pointer;">{{user.id}}</td>
-					<td ng-click="showModalUni('#userModal')" style="cursor: pointer;">{{user.firstName}}</td>
-					<td ng-click="showModalUni('#userModal')" style="cursor: pointer;">{{user.surname}}</td>
-					<td ng-click="showModalUni('#userModal')" style="cursor: pointer;">{{user.organisation}}</td>
-					<td ng-click="showModalUni('#userModal')" style="cursor: pointer;">{{user.assigned}}</td>
-					<td ng-click="showModalUni('#userModal')" style="cursor: pointer;">{{user.done}}</td>
+					<td ng-click="showModalUni('#userModal',user)" style="cursor: pointer;">{{user.id}}</td>
+					<td ng-click="showModalUni('#userModal',user)" style="cursor: pointer;">{{user.firstName}}</td>
+					<td ng-click="showModalUni('#userModal',user)" style="cursor: pointer;">{{user.surname}}</td>
+					<td ng-click="showModalUni('#userModal',user)" style="cursor: pointer;">{{user.organisation}}</td>
+					<td ng-click="showModalUni('#userModal',user)" style="cursor: pointer;">{{user.assigned}}</td>
+					<td ng-click="showModalUni('#userModal',user)" style="cursor: pointer;">{{user.done}}</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 </div>
-<div id="createUserModal" class="modal" role="dialog">
+
+<div id="createUserModal" class="modal fade" role="dialog" >
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -92,4 +93,5 @@
 		</div>
 	</div>
 </div><!--/modal-->
+
 </div>

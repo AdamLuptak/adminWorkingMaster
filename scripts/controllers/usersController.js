@@ -1,5 +1,6 @@
-adminGui.controller('usersController', [ '$scope','usersService','taskService','$location','$stateParams','$state','$modal','ModalService', function($scope,usersService,taskService,$location,$stateParams,$state,$modal,ModalService) {
+adminGui.controller('usersController', [ '$scope','usersService','taskService','$location','$stateParams','$state','$modal', function($scope,usersService,taskService,$location,$stateParams,$state,$modal) {
 	
+	//modal view
 	$scope.showModal = function(user) {
 		$scope.searchedUser = user;
 		$scope.opts = {
@@ -11,7 +12,6 @@ adminGui.controller('usersController', [ '$scope','usersService','taskService','
 			controller : ModalInstanceCtrl,
         resolve: {} // empty storage
     };
-
 
     $scope.opts.resolve.item = function() {
             return angular.copy($scope.searchedUser); // pass name to Dialog
@@ -27,6 +27,8 @@ adminGui.controller('usersController', [ '$scope','usersService','taskService','
             console.log("Modal Closed");
         });
     }
+    //end of modal view
+
 
     $scope.close = function () {
     	$modalInstance.dismiss('cancel');
@@ -43,19 +45,17 @@ adminGui.controller('usersController', [ '$scope','usersService','taskService','
 
     $scope.showUserModal = function(user){
     	$scope.qsCurrUser = user;
-
     	//$('#userModal').modal('show');
     	angular.element('#userModal').modal('show');
     }
-
-
 
     $scope.showCreateModal = function(){
 	//	$('#createUserModal').modal('show');
 	angular.element('#createUserModal').modal('show');
 }
 
-$scope.showModalUni=function(modal){
+$scope.showModalUni=function(modal,user){
+	$scope.qsCurrUser = (user != null) ? user : null;
 	angular.element(modal).modal('show');
 };
 

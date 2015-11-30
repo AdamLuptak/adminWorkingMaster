@@ -8,3 +8,13 @@ adminGui.factory('taskService', ['$http', function($http) {
 	    });
 	
 }]);
+
+
+
+adminGui.factory('taskServiceGET', function($http) {
+	return{
+		getAllChartData: function() {
+			return $http.get('scripts/service/task.json');
+		}
+	}
+});

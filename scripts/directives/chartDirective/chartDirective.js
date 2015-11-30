@@ -50,16 +50,6 @@ angular.module('AdminGui')
 					$scope.dataChart = data.data;
 					//selecet actual dataSet
 					$scope.actualDataSet = $scope.dataChart[$scope.actualDataSet];
-					$scope.actualDataSet.onClick = function (points, evt){
-						console.log(points, evt);
-					}
-					$scope.actualDataSet.onHover = function (points) {
-						if (points.length > 0) {
-							console.log('Point', points[0].value);
-						} else {
-							console.log('No point');
-						}
-					};
 					//clone object for redrawing chart depence on checkboxess
 					$scope.newTeamMember = angular.copy($scope.actualDataSet);
 				});

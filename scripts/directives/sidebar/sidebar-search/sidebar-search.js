@@ -17,31 +17,20 @@
     },
     controller:function($scope){
       $scope.selectedMenu = 'home';
-      $scope.selectedState = "";
-     //  dashtaskService.success(function(data) {
-     //   $scope.items = data; 
-     // })
 
- $scope.searchClick = function(value){
-  $scope.searched = "";
-  $scope.user = value;
-  if(value.firstName != null){
-    ModalService.setData($scope.user);
-    $state.go("dashboard.users", { userData: $scope.user});
-    
-  }else{
+      $scope.searchClick = function(value){
+        $scope.searched = "";
+        $scope.user = value;
+        if(value.firstName != null){
+          $state.go("dashboard.users", { userData: $scope.user});
+        }else{
 
-  }
+        }
+      }
 
-}
-
-
-usersService.success(function(data){
+      usersService.success(function(data){
  // console.log(data);
  $scope.users = data;
-
-
-
  taskService.success(function(data){
     //console.log(data);
     $scope.tasks = data;
@@ -49,13 +38,8 @@ usersService.success(function(data){
     console.log( $scope.itemSearch);
   })
 
-
-
 })
 
-
-
-
-}
-}
+    }
+  }
 }]);

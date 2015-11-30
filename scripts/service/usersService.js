@@ -7,3 +7,13 @@ adminGui.factory('usersService', ['$http', function($http) {
            return data;
          });
 }]);
+
+
+
+adminGui.factory('usersServiceGET', function($http) {
+	return{
+		getAllChartData: function() {
+			return $http.get('scripts/service/users.json');
+		}
+	}
+});
