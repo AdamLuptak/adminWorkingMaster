@@ -1,4 +1,4 @@
-adminGui.controller('usersController', [ '$scope','usersService','taskService','$location','$stateParams','$state','$modal', function($scope,usersService,taskService,$location,$stateParams,$state,$modal) {
+adminGui.controller('usersController', [ '$scope','usersService','taskService','$location','$stateParams','$state','$modal','userTaskService', function($scope,usersService,taskService,$location,$stateParams,$state,$modal,userTaskService) {
 	
 	//modal view
 	$scope.showModal = function(user) {
@@ -16,6 +16,12 @@ adminGui.controller('usersController', [ '$scope','usersService','taskService','
     $scope.opts.resolve.item = function() {
             return angular.copy($scope.searchedUser); // pass name to Dialog
         }
+        // $scope.opts.resolve.item2 = function() {
+        //     return angular.copy($scope.searchedTask, $scope.userTasks); // pass name to Dialog
+        // }
+        // $scope.opts.resolve.item3 = function() {
+        //     return angular.copy($scope.searchedTasks, $scope.tasks); // pass name to Dialog
+        // }
         
         var modalInstance = $modal.open($scope.opts);
 
@@ -34,30 +40,42 @@ adminGui.controller('usersController', [ '$scope','usersService','taskService','
     	$modalInstance.dismiss('cancel');
     };
 
+    //Service
 
     usersService.success(function(data) {
     	$scope.users = data;
     });
     taskService.success(function(data) {
     	$scope.tasks = data;
-    	$scope.datas = $scope.users.concat($scope.tasks);
     });
 
-    $scope.showUserModal = function(user){
-    	$scope.qsCurrUser = user;
-    	//$('#userModal').modal('show');
-    	angular.element('#userModal').modal('show');
-    }
+    userTaskService.success(function(data) {
+    	$scope.userTasks = data;
+    });
 
-    $scope.showCreateModal = function(){
-	//	$('#createUserModal').modal('show');
-	angular.element('#createUserModal').modal('show');
-}
+   //end of service
 
-$scope.showModalUni=function(modal,user){
-	$scope.qsCurrUser = (user != null) ? user : null;
-	angular.element(modal).modal('show');
-};
+
+   $scope.showUserModal = function(user){
+   	$scope.currUser = user;
+   	angular.element('#userModal').modal('show');
+   }
+
+
+   $scope.showModalUni=function(modal,user){
+   	$scope.currUser = (user != null) ? user : null;
+   	angular.element(modal).modal('show');
+   };
+
+ //filter
+ $scope.userFilter = function(userTask){
+ 	if($scope.currUser != null){
+ 		return userTask.userId === $scope.currUser.id;
+ 	} return;
+ }
+
+   //end filter
+
 
     //paramter loading from Search - bar
     $scope.qs = $stateParams.userData;
@@ -73,7 +91,7 @@ $scope.showModalUni=function(modal,user){
 			$stateParams.userData = null;
 			$scope.showModal($scope.qs);
 			$scope.qs = null;
-			ModalService.setData(null);	
+			
 		}	
 	}
 
@@ -106,20 +124,6 @@ $scope.showModalUni=function(modal,user){
 		
 		
 	}
-	
-	
-	
-/*	$scope.checked = [
-	                  {id: 5},
-	                  ]
-	
-	$scope.check = function(id){
-		$scope.checked.push({id: id});
-	}
-	
-	$scope.deleteChecked = function(){
-		
-	}*/
 	
 	$scope.currId=10;
 	$scope.createUser = function(){
@@ -165,9 +169,24 @@ $scope.showModalUni=function(modal,user){
 	
 } ]);
 
-var ModalInstanceCtrl = function($scope, $modalInstance, $modal, item) {
+var ModalInstanceCtrl = function($scope, $modalInstance, $modal, item,userTaskService,taskService) {
+
+	taskService.success(function(data) {
+		$scope.tasks = data;
+	});
+
+	userTaskService.success(function(data) {
+		$scope.userTasks = data;
+	});
+
 
 	$scope.searchedUser = item;
+
+	$scope.userFilter = function(userTask){
+		if($scope.searchedUser != null){
+			return userTask.userId === $scope.searchedUser.id;
+		} return;
+	}
 
 	$scope.ok = function () {
 		$scope.searchedUser = null;

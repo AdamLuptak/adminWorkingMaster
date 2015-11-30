@@ -1,0 +1,47 @@
+[ {
+	"userId" : 1,
+	"taskId" : 1,
+	"deadline" : "12.12.2015 10:00",
+	"status" : "in progress"
+},{
+	"userId" : 1,
+	"taskId" : 2,
+	"deadline" : "30.11.2015 12:00",
+	"status" : "done"
+},{
+	"userId" : 2,
+	"taskId" : 3,
+	"deadline" : "6.12.2015 15:00",
+	"status" : "done"
+},{
+	"userId" : 3,
+	"taskId" : 3,
+	"deadline" : "6.12.2015 15:00",
+	"status" : "in progress"
+},{
+	"userId" : 4,
+	"taskId" : 5,
+	"deadline" : "2.12.2015 8:00",
+	"status" : "done"
+},{
+	"userId" : 5,
+	"taskId" : 6,
+	"deadline" : "30.12.2015 20:00",
+	"status" : "in progress"
+},{
+	"userId" : 6,
+	"taskId" : 6,
+	"deadline" : "20.12.2015 12:00",
+	"status" : "in progress"
+},{
+	"userId" : 7,
+	"taskId" : 2,
+	"deadline" : "10.12.2015 7:00",
+	"status" : "done"
+},{
+	"userId" : 9,
+	"taskId" : 1,
+	"deadline" : "3.12.2015 12:00",
+	"status" : "done"
+}
+]

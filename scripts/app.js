@@ -147,6 +147,7 @@
           'scripts/directives/usersTable/usersTable.js',
           'scripts/service/usersService.js',
           'scripts/service/taskService.js',
+          'scripts/service/userTaskService.js',
           ]
         })
       }
