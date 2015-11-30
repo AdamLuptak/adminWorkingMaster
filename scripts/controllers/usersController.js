@@ -1,4 +1,4 @@
-adminGui.controller('usersController', [ '$scope','usersService','taskService','$location','$stateParams','$state','$modal', function($scope,usersService,taskService,$location,$stateParams,$state,$modal) {
+adminGui.controller('usersController', [ '$scope','usersService','taskService','$location','$stateParams','$state','$modal','ModalService', function($scope,usersService,taskService,$location,$stateParams,$state,$modal,ModalService) {
 	
 	$scope.showModal = function(user) {
 		$scope.searchedUser = user;
@@ -23,6 +23,7 @@ adminGui.controller('usersController', [ '$scope','usersService','taskService','
             //on ok button press 
         },function(){
             //on cancel button press
+            $state.go("dashboard.users", { userData: null});
             console.log("Modal Closed");
         });
     }
@@ -43,14 +44,25 @@ adminGui.controller('usersController', [ '$scope','usersService','taskService','
     $scope.showUserModal = function(user){
     	$scope.qsCurrUser = user;
 
-    	$('#userModal').modal('show');
+    	//$('#userModal').modal('show');
+    	angular.element('#userModal').modal('show');
     }
 
+
+
+    $scope.showCreateModal = function(){
+	//	$('#createUserModal').modal('show');
+	angular.element('#createUserModal').modal('show');
+}
+
+$scope.showModalUni=function(modal){
+	angular.element(modal).modal('show');
+};
 
     //paramter loading from Search - bar
     $scope.qs = $stateParams.userData;
 	//must clear statePatams
-	
+	//$scope.qs = ModalService.getData();
 
 
 	if($scope.qs  != null){
@@ -60,7 +72,8 @@ adminGui.controller('usersController', [ '$scope','usersService','taskService','
 			//$scope.showUserFromSearch(qs);
 			$stateParams.userData = null;
 			$scope.showModal($scope.qs);
-			$scope.qs = null;	
+			$scope.qs = null;
+			ModalService.setData(null);	
 		}	
 	}
 
@@ -79,10 +92,6 @@ adminGui.controller('usersController', [ '$scope','usersService','taskService','
 	}
 	
 
-	
-	$scope.showCreateModal = function(){
-		$('#createUserModal').modal('show');
-	}
 	
 	$scope.selectedUsers = null;
 	$scope.checkedAll=false;

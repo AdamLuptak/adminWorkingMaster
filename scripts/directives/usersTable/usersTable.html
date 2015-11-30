@@ -34,7 +34,7 @@
 
 			<div class="col-lg-7"></div>
 			<div class="col-lg-2">
-				<button id="button" class="btn btn-default" ng-click="showCreateModal()">Create User</button>
+				<button id="button" class="btn btn-default" ng-click="showModalUni('#createUserModal')">Create User</button>
 				<button id="button" class="btn btn-default">Delete Selected</button>
 			</div>
 
@@ -56,12 +56,12 @@
 			<tbody>
 				<tr ng-repeat="user in users | filter:search | orderBy:orderByField:reverseSort" >
 					<td><input type="checkbox" class="check" value="user.id"></td>
-					<td ng-click="showUserModal(user)" style="cursor: pointer;">{{user.id}}</td>
-					<td ng-click="showUserModal(user)" style="cursor: pointer;">{{user.firstName}}</td>
-					<td ng-click="showUserModal(user)" style="cursor: pointer;">{{user.surname}}</td>
-					<td ng-click="showUserModal(user)" style="cursor: pointer;">{{user.organisation}}</td>
-					<td ng-click="showUserModal(user)" style="cursor: pointer;">{{user.assigned}}</td>
-					<td ng-click="showUserModal(user)" style="cursor: pointer;">{{user.done}}</td>
+					<td ng-click="showModalUni('#userModal')" style="cursor: pointer;">{{user.id}}</td>
+					<td ng-click="showModalUni('#userModal')" style="cursor: pointer;">{{user.firstName}}</td>
+					<td ng-click="showModalUni('#userModal')" style="cursor: pointer;">{{user.surname}}</td>
+					<td ng-click="showModalUni('#userModal')" style="cursor: pointer;">{{user.organisation}}</td>
+					<td ng-click="showModalUni('#userModal')" style="cursor: pointer;">{{user.assigned}}</td>
+					<td ng-click="showModalUni('#userModal')" style="cursor: pointer;">{{user.done}}</td>
 				</tr>
 			</tbody>
 		</table>

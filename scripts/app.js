@@ -33,7 +33,8 @@
               'scripts/directives/sidebar/sidebar-search/sidebar-search.js',
               'scripts/service/dashtaskService.js',
               'scripts/service/taskService.js',
-              'scripts/service/usersService.js'
+              'scripts/service/usersService.js',
+              'scripts/service/modalService.js'
               ]
             }),
             $ocLazyLoad.load(
