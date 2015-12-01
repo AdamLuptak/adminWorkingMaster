@@ -190,6 +190,9 @@
               templateUrl: 'views/pages/tasks1.html',
               url: '/tasks1',
               controller: 'TasksController',
+              params: {
+                  taskData: null
+              },
               resolve: {
                   loadMyFiles: function($ocLazyLoad) {
                       return $ocLazyLoad.load({

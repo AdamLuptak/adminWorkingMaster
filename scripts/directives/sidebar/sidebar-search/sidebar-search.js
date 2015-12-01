@@ -24,7 +24,7 @@
         if(value.firstName != null){
           $state.go("dashboard.users", { userData: $scope.user});
         }else{
-
+          $state.go("dashboard.tasks1", { taskData: $scope.user});
         }
       }
 

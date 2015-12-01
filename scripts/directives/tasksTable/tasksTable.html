@@ -14,8 +14,8 @@
             <table class="table table-striped table-bordered table-hover" id="tableUsers">
                 <thead>
                     <tr>
-                        <th ng-repeat='head in tableHeads'><a href="#/dashboard/tasks1" ng-click="orderBy(head.name)"> {{head.label}} 
-								<span ng-show="orderByField == head.name"> <span
+                        <th><a href="#/dashboard/tasks1" ng-click="orderBy('name')">Tasks
+								<span ng-show="orderByField == 'name'"> <span
 									ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span> <span
 									ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span>
 							</span>
