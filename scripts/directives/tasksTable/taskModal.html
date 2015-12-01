@@ -1,0 +1,41 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" ng-click="cancel()">x</button>
+    <h3 id="task" class="text-center"><h3 style="color: #E20074;">{{selectedTask.name}}</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-12 col-md-offset-0.5">
+            <p class="text-justify">{{selectedTask.description}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <p>
+            <ul>
+                <li ng-repeat="detail in selectedTask.details">{{detail.desc}}</li>
+            </ul>
+        </p>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-lg-2">
+            <h4>User:</h4></div>
+        <div class="col-lg-4">
+            <select class="form-control">
+                <option>Employee1</option>
+                <option>Employee2</option>
+                <option>Employee4</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            <h4>Time:</h4></div>
+        <div class="col-lg-4">
+            <input class="form-control" type="date">
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-lg btn-default center-block" data-dismiss="modal" ng-click="cancel()" aria-hidden="true">Close</button>
+    <button id="button" class="btn pull-center btn btn-default" ng-click="select(task)">Assign</button>
+</div>

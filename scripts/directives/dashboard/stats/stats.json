@@ -4,26 +4,26 @@
 	"comments":"New tasks",
 	"colour":"primary",
 	"type":"plus",
-	"href":"#/dashboard/tasks"
+	"href":"#/dashboard/tasks1"
 },
 {	"number":12,
 	"comments":"Assigned tasks",
 	"colour":"red",
 	"type":"tasks",
-	"href":"#/dashboard/home"
+	"href":"#/dashboard/tasks1"
 },
 {
 	"number":18,
 	"comments":"In progress",
 	"colour":"yellow",
 	"type":"spinner",
-	"href":"#/dashboard/home"
+	"href":"#/dashboard/tasks1"
 },
 {
 	"number":24,
 	"comments":"Done",
 	"colour":"green",
 	"type":"check-square-o",
-	"href":"#/dashboard/home"
+	"href":"#/dashboard/tasks1"
 }
 ]
