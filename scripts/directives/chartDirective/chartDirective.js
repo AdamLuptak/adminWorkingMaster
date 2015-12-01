@@ -1,93 +1,93 @@
 angular.module('AdminGui')
-.directive('chartDirective',['$http','chartService',function($http,chartService) {
-	return {
-		restrict: 'E',
-		replace: true,
-		scope:{},
-		templateUrl: 'scripts/directives/chartDirective/chartUniversalDirective.html',
-		link: function ($scope) {
-			console.log($scope)
-			//variable where is storred actual chart
-			$scope.chartSelector = 0;
-		 	//variable for all chart data
-		 	$scope.dataChart = 0;
-          //for checkbox 
-          $scope.actualDataSetNumber = 0;
+    .directive('chartDirective', ['$http', 'chartService', function($http, chartService) {
+        return {
+            restrict: 'E',
+            replace: true,
+            scope: {},
+            templateUrl: 'scripts/directives/chartDirective/chartUniversalDirective.html',
+            link: function($scope) {
+                    console.log($scope)
+                        //variable where is storred actual chart
+                    $scope.chartSelector = 0;
+                    //variable for all chart data
+                    $scope.dataChart = 0;
+                    //for checkbox 
+                    $scope.actualDataSetNumber = 0;
 
-          $scope.actualDataSet = 0;
+                    $scope.actualDataSet = 0;
 
-          $scope.chartSelect="line";
+                    $scope.chartSelect = "line";
 
-          $scope.page1 = "scripts/directives/chartDirective/lineChartPlot.html";
+                    $scope.page1 = "scripts/directives/chartDirective/lineChartPlot.html";
 
-          $scope.checkedCheckBoxes = [];
+                    $scope.checkedCheckBoxes = [];
 
-         //after change value in combox change the type of chart
-         $scope.$watch('chartSelect', function(value) {
-         	$scope.chartSelect = value;
-         	$scope.changeChart(value);
-         });
+                    //after change value in combox change the type of chart
+                    $scope.$watch('chartSelect', function(value) {
+                        $scope.chartSelect = value;
+                        $scope.changeChart(value);
+                    });
 
-            //switches diferent chart html 
-            $scope.changeChart= function(value){
-            	switch(value) {
-            		case 'line':
-            		$scope.page1 = "scripts/directives/chartDirective/barChartPlot.html";
-            		break;
-            		case 'bar':
-            		$scope.page1 = "scripts/directives/chartDirective/lineChartPlot.html";
-            		break;
-            		default:
-            		$scope.page1 = "scripts/directives/chartDirective/lineChartPlot.html";
-            	}
-            }
+                    //switches diferent chart html 
+                    $scope.changeChart = function(value) {
+                        switch (value) {
+                            case 'line':
+                                $scope.page1 = "scripts/directives/chartDirective/barChartPlot.html";
+                                break;
+                            case 'bar':
+                                $scope.page1 = "scripts/directives/chartDirective/lineChartPlot.html";
+                                break;
+                            default:
+                                $scope.page1 = "scripts/directives/chartDirective/lineChartPlot.html";
+                        }
+                    }
 
-			//make promise for loading data from service
-			var promise = chartService.getAllChartData();
-			promise.then(
-				function(data) {
-					//all data
-					$scope.dataChart = data.data;
-					//selecet actual dataSet
-					$scope.actualDataSet = $scope.dataChart[$scope.actualDataSet];
-					//clone object for redrawing chart depence on checkboxess
-					$scope.newTeamMember = angular.copy($scope.actualDataSet);
-				});
+                    //make promise for loading data from service
+                    var promise = chartService.getAllChartData();
+                    promise.then(
+                        function(data) {
+                            //all data
+                            $scope.dataChart = data.data;
+                            //selecet actual dataSet
+                            $scope.actualDataSet = $scope.dataChart[$scope.actualDataSet];
+                            //clone object for redrawing chart depence on checkboxess
+                            $scope.newTeamMember = angular.copy($scope.actualDataSet);
+                        });
 
-			//depece of checked checbox schow value in chart
-			$scope.checkedBox = function(value){
-				var isThere = false;
-				for(var i =  -1; i < $scope.checkedCheckBoxes.length ; i++) {
-					if($scope.checkedCheckBoxes[i] === value) {
-						isThere = true;
-					}
-				}
-				if(isThere){
-					$scope.checkedCheckBoxes.splice($scope.checkedCheckBoxes.indexOf(value),1);
+                    //depece of checked checbox schow value in chart
+                    $scope.checkedBox = function(value) {
+                            var isThere = false;
+                            for (var i = -1; i < $scope.checkedCheckBoxes.length; i++) {
+                                if ($scope.checkedCheckBoxes[i] === value) {
+                                    isThere = true;
+                                }
+                            }
+                            if (isThere) {
+                                $scope.checkedCheckBoxes.splice($scope.checkedCheckBoxes.indexOf(value), 1);
 
-				}else{
-					$scope.checkedCheckBoxes.push(value);
-				}
-		     //initial object with old values
-		     $scope.actualDataSet = angular.copy($scope.newTeamMember);
-		    //prida vsetko okrem toho co nieje v poli
-		    for (var i = 0; i < $scope.checkedCheckBoxes.length; i++) {
-		    	for (var i = 0; i < $scope.actualDataSet.data.length; i++) {
-		    		for (var j = 0; j < $scope.actualDataSet.data[$scope.actualDataSetNumber].length; j++) {
-		    			if($scope.actualDataSet.series.indexOf($scope.checkedCheckBoxes[i]) > -1){
-		    				continue;
-		    			}else{
-		    				$scope.actualDataSet.data[i][j] = null;
-		    			}
-		    		};
-		    	};
-		    };
-		    console.log($scope.checkedCheckBoxes)
-		    $scope.changeChart($scope.chartSelect);
-		}
-		//end of checkbox function
-	}
-	//end of directive controller
-}
-//end of directive return    
-}]);
+                            } else {
+                                $scope.checkedCheckBoxes.push(value);
+                            }
+                            //initial object with old values
+                            $scope.actualDataSet = angular.copy($scope.newTeamMember);
+                            //prida vsetko okrem toho co nieje v poli
+                            for (var i = 0; i < $scope.checkedCheckBoxes.length; i++) {
+                                for (var i = 0; i < $scope.actualDataSet.data.length; i++) {
+                                    for (var j = 0; j < $scope.actualDataSet.data[$scope.actualDataSetNumber].length; j++) {
+                                        if ($scope.actualDataSet.series.indexOf($scope.checkedCheckBoxes[i]) > -1) {
+                                            continue;
+                                        } else {
+                                            $scope.actualDataSet.data[i][j] = null;
+                                        }
+                                    };
+                                };
+                            };
+                            console.log($scope.checkedCheckBoxes)
+                            $scope.changeChart($scope.chartSelect);
+                        }
+                        //end of checkbox function
+                }
+                //end of directive controller
+        }
+        //end of directive return    
+    }]);
