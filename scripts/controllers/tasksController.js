@@ -4,6 +4,7 @@ adminGui.controller('TasksController', ['$scope', 'taskService', '$modal', '$sta
     taskService.success(function(data) {
         $scope.tasks = data;
     })
+
     $scope.orderByField = 'name';
     $scope.reverseSort = false;
     $scope.orderBy = function(field) {
@@ -22,6 +23,7 @@ adminGui.controller('TasksController', ['$scope', 'taskService', '$modal', '$sta
     };
     $scope.selectTask = function(index) {
         $scope.selectedTask = index
+       //  angular.element('#createTask').modal('hide');
     };
     $scope.newTask = {
         "id": 1,
@@ -38,6 +40,8 @@ adminGui.controller('TasksController', ['$scope', 'taskService', '$modal', '$sta
             "details": []
         };
         $scope.newTask = null;
+        angular.element('#createTask').modal('hide');
+
     };
 
     //modal view
@@ -81,9 +85,9 @@ adminGui.controller('TasksController', ['$scope', 'taskService', '$modal', '$sta
     //paramter loading from Search - bar
     $scope.qs = $stateParams.taskData;
     //must clear statePatams
-        /*
-         *open modal with user data from search bar
-         */
+    /*
+     *open modal with user data from search bar
+     */
     if ($scope.qs != null) {
         if ($scope.qs.name != null && $scope.qs.id != null) {
             console.log($scope.qs);
@@ -101,7 +105,7 @@ adminGui.controller('TasksController', ['$scope', 'taskService', '$modal', '$sta
 
 var ModalInstanceCtrl = function($scope, $modalInstance, $modal, item) {
 
-   
+
     $scope.selectedTask = item;
 
     $scope.userFilter = function(userTask) {
@@ -121,4 +125,3 @@ var ModalInstanceCtrl = function($scope, $modalInstance, $modal, item) {
         $modalInstance.dismiss('cancel');
     };
 }
-
