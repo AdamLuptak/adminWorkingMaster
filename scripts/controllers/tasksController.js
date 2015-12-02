@@ -1,9 +1,13 @@
 //controler for Login
-adminGui.controller('TasksController', ['$scope', 'taskService', '$modal', '$state', '$stateParams', function($scope, taskService, $modal, $state, $stateParams) {
+adminGui.controller('TasksController', ['$scope', 'taskService', 'usersService', '$modal', '$state', '$stateParams', function($scope, taskService, usersService, $modal, $state, $stateParams) {
 
     taskService.success(function(data) {
         $scope.tasks = data;
     })
+
+    usersService.success(function(data) {
+        $scope.users = data;
+    });
 
     $scope.orderByField = 'name';
     $scope.reverseSort = false;
@@ -23,7 +27,7 @@ adminGui.controller('TasksController', ['$scope', 'taskService', '$modal', '$sta
     };
     $scope.selectTask = function(index) {
         $scope.selectedTask = index
-       //  angular.element('#createTask').modal('hide');
+            //  angular.element('#createTask').modal('hide');
     };
     $scope.newTask = {
         "id": 1,
