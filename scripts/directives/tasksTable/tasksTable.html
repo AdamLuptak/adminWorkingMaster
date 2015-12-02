@@ -14,6 +14,7 @@
             <table class="table table-striped table-bordered table-hover" id="tableUsers">
                 <thead>
                     <tr>
+                    	<th><input type="checkbox"></th>
                         <th><a href="#/dashboard/tasks1" ng-click="orderBy('name')">Tasks
 								<span ng-show="orderByField == 'name'"> <span
 									ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span> <span
@@ -24,6 +25,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="task in tasks | filter:search | orderBy:orderByField:reverseSort">
+                    	<td><input type="checkbox"></td>
                         <td style="cursor: pointer;" ng-click="selectTask(task)" data-toggle="modal" data-target="#viewTask">{{task.name}}</td>
                     </tr>
                 </tbody>
@@ -56,9 +58,7 @@
                             <h4>User:</h4></div>
                         <div class="col-lg-4">
                             <select class="form-control">
-                                <option>Employee1</option>
-                                <option>Employee2</option>
-                                <option>Employee4</option>
+                                <option ng-repeat="user in users">{{user.firstName}} {{user.surname}}</option>
                             </select>
                         </div>
                     </div>

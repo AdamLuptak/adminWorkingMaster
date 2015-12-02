@@ -1,9 +1,14 @@
 //controler for Login
-adminGui.controller('TasksController', ['$scope', 'taskService', '$modal', '$state', '$stateParams', function($scope, taskService, $modal, $state, $stateParams) {
+adminGui.controller('TasksController', ['$scope', 'taskService', 'usersService', '$modal', '$state', '$stateParams', function($scope, taskService, usersService, $modal, $state, $stateParams) {
 
     taskService.success(function(data) {
         $scope.tasks = data;
     })
+    
+    usersService.success(function(data) {
+              $scope.users = data;
+       });
+    
     $scope.orderByField = 'name';
     $scope.reverseSort = false;
     $scope.orderBy = function(field) {
