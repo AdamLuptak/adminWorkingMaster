@@ -1,4 +1,4 @@
-adminGui.controller('usersController', ['$scope', 'usersService', 'taskService', '$location', '$stateParams', '$state', '$modal', 'userTaskService', function($scope, usersService, taskService, $location, $stateParams, $state, $modal, userTaskService) {
+adminGui.controller('usersController', ['$scope', 'usersService', 'taskService', '$location', '$stateParams', '$state', '$modal', 'userTaskService', '$http', function($scope, usersService, taskService, $location, $stateParams, $state, $modal, userTaskService, $http) {
 
     //modal view
     $scope.showModal = function(user) {
@@ -32,6 +32,8 @@ adminGui.controller('usersController', ['$scope', 'usersService', 'taskService',
                 $state.go("dashboard.users", {
                     userData: null
                 });
+
+
                 console.log("Modal Closed");
             });
         }
@@ -46,6 +48,7 @@ adminGui.controller('usersController', ['$scope', 'usersService', 'taskService',
 
     usersService.success(function(data) {
         $scope.users = data;
+        $scope.usersBackup = angular.copy($scope.users);
     });
     taskService.success(function(data) {
         $scope.tasks = data;
@@ -83,10 +86,10 @@ adminGui.controller('usersController', ['$scope', 'usersService', 'taskService',
     //paramter loading from Search - bar
     $scope.qs = $stateParams.userData;
     //must clear statePatams
- 
- 	/*
- 	 *open modal with user data from search bar
- 	 */
+
+    /*
+     *open modal with user data from search bar
+     */
     if ($scope.qs != null) {
         if ($scope.qs.firstName != null && $scope.qs.surname != null) {
             console.log($scope.qs);
@@ -95,7 +98,12 @@ adminGui.controller('usersController', ['$scope', 'usersService', 'taskService',
             $stateParams.userData = null;
             $scope.showModal($scope.qs);
             $scope.qs = null;
-
+            //pozor len kvoli skuske treba dat het potom
+            $http.get("scripts/service/users.json")
+                .then(function(response) {
+                    console.log(response)
+                    $scope.users = response.data;
+                });
         }
     }
 
@@ -170,6 +178,50 @@ adminGui.controller('usersController', ['$scope', 'usersService', 'taskService',
         name: 'done',
         label: 'Tasks done'
     }]
+
+    //checkBox part check and delete
+    //I want delete this item in this list
+    var checkTask = new Array();
+
+    $scope.checkedTask = function(event, data, all) {
+        if (!all) {
+            if (event.check) {
+                checkTask.push(data);
+            } else {
+                checkTask.splice(checkTask.indexOf(data), 1);
+            }
+        } else {
+            if (event) {
+                for (index in $scope.users) {
+                    checkTask.push($scope.users[index].id);
+                }
+                $("#checkAll").change(function() {
+                    $("input:checkbox").prop('checked', $(this).prop("checked"));
+                });
+            } else {
+                for (index in $scope.users) {
+                    checkTask.splice(checkTask.indexOf($scope.users[index].id), 1);
+                }
+            }
+        }
+    }
+
+    $scope.delete = function() {
+        for (idItem in checkTask) {
+            //  checkTask.splice(checkTask.indexOf($scope.tasks[index].id), 1);
+            for (index in $scope.users) {
+                if ($scope.users[index].id === checkTask[idItem]) {
+                    $scope.users.splice(index, 1);
+                }
+            }
+        }
+        checkTask = [];
+        $scope.checkAll = false;
+    }
+
+
+
+
 
 }]);
 

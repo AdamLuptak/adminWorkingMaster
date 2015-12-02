@@ -1,5 +1,5 @@
 //controler for Login
-adminGui.controller('TasksController', ['$scope', 'taskService', 'usersService', '$modal', '$state', '$stateParams', function($scope, taskService, usersService, $modal, $state, $stateParams) {
+adminGui.controller('TasksController', ['$scope', 'taskService', 'usersService', '$modal', '$state', '$stateParams', '$http', function($scope, taskService, usersService, $modal, $state, $stateParams, $http) {
 
     taskService.success(function(data) {
         $scope.tasks = data;
@@ -27,8 +27,54 @@ adminGui.controller('TasksController', ['$scope', 'taskService', 'usersService',
     };
     $scope.selectTask = function(index) {
         $scope.selectedTask = index
-            //  angular.element('#createTask').modal('hide');
+            //angular.element('#createTask').modal('hide');
     };
+    $scope.assignTask = function(newTask) {
+        $scope.newTask = newTask;
+        //connect to server and register new task wait for response
+        // if response will Ok 200 then show message box ok if not theanerror
+        angular.element('#viewTask').modal('hide');
+    }
+
+    //I want delete this item in this list
+    var checkTask = new Array();
+
+    $scope.checkedTask = function(event, data, all) {
+        if (!all) {
+            if (event.check) {
+                checkTask.push(data);
+            } else {
+                checkTask.splice(checkTask.indexOf(data), 1);
+            }
+        } else {
+            if (event) {
+                for (index in $scope.tasks) {
+                    checkTask.push($scope.tasks[index].id);
+                }
+                $("#checkAll").change(function() {
+                    $("input:checkbox").prop('checked', $(this).prop("checked"));
+                });
+            } else {
+                for (index in $scope.tasks) {
+                    checkTask.splice(checkTask.indexOf($scope.tasks[index].id), 1);
+                }
+            }
+        }
+    }
+
+    $scope.delete = function() {
+        for (idItem in checkTask) {
+            //  checkTask.splice(checkTask.indexOf($scope.tasks[index].id), 1);
+            for (index in $scope.tasks) {
+                if ($scope.tasks[index].id === checkTask[idItem]) {
+                    $scope.tasks.splice(index, 1);
+                }
+            }
+        }
+        checkTask = [];
+        $scope.checkAll = false;
+    }
+
     $scope.newTask = {
         "id": 1,
         "name": "",
@@ -47,6 +93,13 @@ adminGui.controller('TasksController', ['$scope', 'taskService', 'usersService',
         angular.element('#createTask').modal('hide');
 
     };
+
+$http.get("scripts/service/task.json")
+                .then(function(response) {
+                    console.log(response)
+                    $scope.tasks = response.data;
+                });
+
 
     //modal view
     $scope.showModal = function(user) {
@@ -100,6 +153,11 @@ adminGui.controller('TasksController', ['$scope', 'taskService', 'usersService',
             $stateParams.userData = null;
             $scope.showModal($scope.qs);
             $scope.qs = null;
+            $http.get("scripts/service/task.json")
+                .then(function(response) {
+                    console.log(response)
+                    $scope.tasks = response.data;
+                });
 
         }
     }

@@ -20,7 +20,7 @@
               url: '/dashboard',
               templateUrl: 'views/dashboard/main.html',
               data: {
-                  requireLogin: false
+                  requireLogin: true
               },
               resolve: {
                   loadMyDirectives: function($ocLazyLoad) {
@@ -71,7 +71,7 @@
               controller: 'MainCtrl',
               templateUrl: 'views/dashboard/home.html',
               data: {
-                  requireLogin: false
+                  requireLogin: true
               },
               resolve: {
                   loadMyFiles: function($ocLazyLoad) {
@@ -103,7 +103,7 @@
               url: '/tasks',
               controller: 'TaskController',
               data: {
-                  requireLogin: false
+                  requireLogin: true
               },
               resolve: {
                   loadMyFiles: function($ocLazyLoad) {
@@ -143,7 +143,7 @@
                   userData: null
               },
               data: {
-                  requireLogin: false
+                  requireLogin: true
               },
               resolve: {
                   loadMyFiles: function($ocLazyLoad) {
@@ -165,7 +165,7 @@
               url: '/chart',
               controller: 'ChartCtrl',
               data: {
-                  requireLogin: false
+                  requireLogin: true
               },
               resolve: {
                   loadMyFile: function($ocLazyLoad) {
@@ -192,6 +192,9 @@
               controller: 'TasksController',
               params: {
                   taskData: null
+              },
+              data: {
+                  requireLogin: true
               },
               resolve: {
                   loadMyFiles: function($ocLazyLoad) {
