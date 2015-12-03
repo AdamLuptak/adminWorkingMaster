@@ -21,9 +21,7 @@
             <h4>User:</h4></div>
         <div class="col-lg-4">
             <select class="form-control">
-                <option>Employee1</option>
-                <option>Employee2</option>
-                <option>Employee4</option>
+                <option ng-repeat="user in usersData">{{user.firstName}} {{user.surname}}</option>
             </select>
         </div>
     </div>
@@ -36,6 +34,6 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-lg btn-default center-block" data-dismiss="modal" ng-click="cancel()" aria-hidden="true">Close</button>
-    <button id="button" class="btn pull-center btn btn-default" ng-click="select(task)">Assign</button>
+    <button id="button" class="btn pull-right btn btn-default" ng-click="cancel()" data-dismiss="modal">Close</button>
+    <button id="button" class="btn pull-center btn btn-default" ng-click="cancel()">Assign</button>
 </div>

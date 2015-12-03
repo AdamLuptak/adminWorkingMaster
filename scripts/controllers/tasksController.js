@@ -94,11 +94,11 @@ adminGui.controller('TasksController', ['$scope', 'taskService', 'usersService',
 
     };
 
-$http.get("scripts/service/task.json")
-                .then(function(response) {
-                    console.log(response)
-                    $scope.tasks = response.data;
-                });
+    $http.get("scripts/service/task.json")
+        .then(function(response) {
+            console.log(response)
+            $scope.tasks = response.data;
+        });
 
 
     //modal view
@@ -110,7 +110,7 @@ $http.get("scripts/service/task.json")
                 dialogFade: false,
                 keyboard: true,
                 templateUrl: '/scripts/directives/tasksTable/taskModal.html',
-                controller: ModalInstanceCtrl,
+                controller: ModalInstanceCtrl1,
                 resolve: {} // empty storage
             };
 
@@ -153,11 +153,11 @@ $http.get("scripts/service/task.json")
             $stateParams.userData = null;
             $scope.showModal($scope.qs);
             $scope.qs = null;
-            $http.get("scripts/service/task.json")
-                .then(function(response) {
-                    console.log(response)
-                    $scope.tasks = response.data;
-                });
+            // $http.get("scripts/service/task.json")
+            //     .then(function(response) {
+            //         console.log(response)
+            //         $scope.tasks = response.data;
+            //     });
 
         }
     }
@@ -165,8 +165,13 @@ $http.get("scripts/service/task.json")
 
 }]);
 
-var ModalInstanceCtrl = function($scope, $modalInstance, $modal, item) {
+var ModalInstanceCtrl1 = function($scope, $modalInstance, $modal, item, usersService) {
 
+
+
+    usersService.success(function(data) {
+        $scope.usersData = data;
+    })
 
     $scope.selectedTask = item;
 
